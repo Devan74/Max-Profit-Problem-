@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Max Profit Problem </title>
+  </head>
+  <body>
+    <script>
+      function findOptimalMix(timeUnit) {
+        const earningsTheatre = 1500;
+        const earningsPub = 1000;
+        const earningsCommercialPark = 3000;
+
+        // Option 1: Build a Theatre
+        const theatreTimeUnits = 5;
+        const theatreEarnings = earningsTheatre;
+        const remainingTimeUnitsOption1 = timeUnit - theatreTimeUnits;
+        const option1 = { T: 1, P: 0, C: 0, earnings: theatreEarnings };
+
+        // Option 2: Build a Pub
+        const pubTimeUnits = 4;
+        const pubEarnings = earningsPub;
+        const remainingTimeUnitsOption2 = timeUnit - pubTimeUnits;
+        const option2 = { T: 0, P: 1, C: 0, earnings: pubEarnings };
+
+        // Option 3: Build a Commercial Park
+        const commercialParkTimeUnits = 10;
+        const commercialParkEarnings = earningsCommercialPark;
+        const remainingTimeUnitsOption3 = timeUnit - commercialParkTimeUnits;
+        const option3 = { T: 0, P: 0, C: 1, earnings: commercialParkEarnings };
+
+        // Evaluate all options
+        const options = [option1, option2];
+        if (remainingTimeUnitsOption3 >= 0) {
+          options.push(option3);
+        }
+
+        let maxEarnings = 0;
+        let optimalMix = null;
+
+        for (const option of options) {
+          if (option.earnings > maxEarnings) {
+            maxEarnings = option.earnings;
+            optimalMix = option;
+          }
+        }
+
+        return optimalMix;
+      }
+
+      // Test Case 1
+      const timeUnit1 = 7;
+      const earnings1 = 3000;
+      const optimalMix1 = findOptimalMix(timeUnit1);
+      console.log(
+        `Test Case 1: T: ${optimalMix1.T}, P: ${optimalMix1.P}, C: ${optimalMix1.C}`
+      );
+
+      // Test Case 2
+      const timeUnit2 = 8;
+      const earnings2 = 4500;
+      const optimalMix2 = findOptimalMix(timeUnit2);
+      console.log(
+        `Test Case 2: T: ${optimalMix2.T}, P: ${optimalMix2.P}, C: ${optimalMix2.C}`
+      );
+
+      // Test Case 3
+      const timeUnit3 = 13;
+      const earnings3 = 16500;
+      const optimalMix3 = findOptimalMix(timeUnit3);
+      console.log(
+        `Test Case 3: T: ${optimalMix3.T}, P: ${optimalMix3.P}, C: ${optimalMix3.C}`
+      );
+    </script>
+  </body>
+</html>
